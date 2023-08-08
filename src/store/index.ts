@@ -2,11 +2,12 @@ import { defineStore } from 'pinia'
 import { ipcRenderer } from 'electron';
 import { onMounted, ref } from 'vue';
 
+import { Gender, Country, Orientation, User } from '../../electron/server/model';
 
 
 export const useStore = defineStore('store', () => {
 
-    const users = ref([])
+    const users = ref<User[]>([])
     const plans = ref([])
     const errors = ref([])
 
@@ -21,9 +22,8 @@ export const useStore = defineStore('store', () => {
         ipcRenderer.send('user-query', query)
     }
 
-    function insertUser(user: any) {
-        console.log(user)
-        ipcRenderer.send('insert-user', user)
+    function insertUser(gender: Gender, country: Country, orientation: Orientation) {
+        ipcRenderer.send('generate-user', gender, country, orientation)
     }
 
     return {

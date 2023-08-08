@@ -19,8 +19,6 @@
     </div>
   </nav>
   <router-view></router-view>
-
-  {{ store.users }}
 </template>
 
 <script setup lang="ts">
@@ -31,7 +29,7 @@ import { useStore } from './store'
 const store = useStore()
 
 onMounted(() => {
-  store.insertUser({ name: 'miguel' })
+  //store.insertUser('MEN', 'Argentina', 'HETERO')
   store.getUsers('SELECT * FROM users')
 })
 

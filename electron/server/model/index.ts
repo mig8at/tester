@@ -38,7 +38,6 @@ export class User {
         for (const file of files) {
             if (file.isFile() && file.name.endsWith('.jpg')) {
                 images.push(file.name);
-                break;
             }
         }
         return images;

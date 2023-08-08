@@ -1,7 +1,6 @@
 import { ipcMain } from 'electron';
 import sqlite3 from 'sqlite3';
-import * as fs from 'fs';
-import * as path from 'path';
+
 import { Gender, Country, Orientation, User } from '../model'; // Asegúrate de importar estos tipos correctamente
 
 
@@ -13,16 +12,25 @@ export default function (db: sqlite3.Database) {
         });
     });
 
-    ipcMain.on('insert-user', (event, user) => {
+    ipcMain.on('generate-user', (event, gender: Gender, country: Country, orientation: Orientation) => {
 
-        const newUser = User.createUser('MEN', 'Argentina', 'HETERO');
-        console.log(newUser)
-        // db.run('INSERT INTO users (name) VALUES (?)', [user.name], function (err) {
-        //     if (err) {
-        //         return console.log(err.message);
-        //     }
-        //     console.log(`Se ha insertado el plan con ID: ${this.lastID}`);
-        // });
+        const user = User.createUser(gender, country, orientation);
+
+        db.run('INSERT INTO users (name, lastname, image, gender, phone, email, sub, orientation, birthday) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+            user.name,
+            user.lastname,
+            user.image,
+            user.gender,
+            user.phone,
+            user.email,
+            user.sub,
+            user.orientation,
+            user.birthday], function (err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+                console.log(`Se ha insertado el plan con ID: ${this.lastID}`);
+            });
     });
 }
 
