@@ -17,7 +17,7 @@ func getImageMen() string {
 	list, _ := listImagesInDirectory("./functions/men")
 	rand.Seed(time.Now().UnixNano())
 	randImage := list[rand.Intn(len(list))]
-	img, _ := imageToBase64(randImage)
+	img, _ := imageToBase64("./functions/men/" + randImage)
 	return img
 }
 
@@ -25,7 +25,7 @@ func getImageWomen() string {
 	list, _ := listImagesInDirectory("./functions/women")
 	rand.Seed(time.Now().UnixNano())
 	randImage := list[rand.Intn(len(list))]
-	img, _ := imageToBase64(randImage)
+	img, _ := imageToBase64("./functions/men/" + randImage)
 	return img
 }
 
