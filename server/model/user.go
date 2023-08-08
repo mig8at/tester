@@ -32,12 +32,12 @@ const (
 )
 
 type User struct {
+	Sub         string      `json:"sub,omitempty"`
 	Name        string      `json:"name,omitempty"`
 	Lastname    string      `json:"lastname,omitempty"`
 	Image       string      `json:"image,omitempty"`
 	Phone       string      `json:"phone,omitempty"`
 	Email       string      `json:"email,omitempty"`
-	Sub         string      `json:"sub,omitempty"`
 	Gender      Gender      `json:"gender,omitempty"`
 	Orientation Orientation `json:"orientation,omitempty"`
 	Birthday    time.Time   `json:"birthday,omitempty"`

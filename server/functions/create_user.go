@@ -18,7 +18,7 @@ func getImageMen() string {
 	rand.Seed(time.Now().UnixNano())
 	randImage := list[rand.Intn(len(list))]
 	img, _ := imageToBase64("./functions/men/" + randImage)
-	return img
+	return "data:image/png;base64," + img
 }
 
 func getImageWomen() string {
@@ -26,7 +26,7 @@ func getImageWomen() string {
 	rand.Seed(time.Now().UnixNano())
 	randImage := list[rand.Intn(len(list))]
 	img, _ := imageToBase64("./functions/men/" + randImage)
-	return img
+	return "data:image/png;base64," + img
 }
 
 func getLastname() string {
@@ -96,7 +96,6 @@ func listImagesInDirectory(dir string) ([]string, error) {
 		if !file.IsDir() {
 			if strings.HasSuffix(file.Name(), ".jpg") {
 				images = append(images, file.Name())
-				break
 			}
 		}
 	}
@@ -104,8 +103,8 @@ func listImagesInDirectory(dir string) ([]string, error) {
 }
 
 func CreateUser(gender model.Gender, country model.Country, orientation model.Orientation) model.User {
-	imageUser := ""
-	nameUser := ""
+	var imageUser string
+	var nameUser string
 	lastName := getLastname()
 	phone := generatePhoneNumber(country)
 	if gender == model.MEN {
@@ -196,7 +195,7 @@ func convertToEmail(name string) string {
 	randomNumbers := rand.Intn(1000)
 
 	// Combinar las partes para crear el correo electrónico
-	email := fmt.Sprintf("%s.%s%03d@gmail.com", firstName, lastName, randomNumbers)
+	email := fmt.Sprintf("%s.%s%03d_test@gmail.com", firstName, lastName, randomNumbers)
 
 	return email
 }
