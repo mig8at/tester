@@ -18,7 +18,9 @@
       </ul>
     </div>
   </nav>
-  <router-view></router-view>
+  <main class="bg-dark">
+    <router-view></router-view>
+  </main>
 </template>
 
 <script setup lang="ts">
